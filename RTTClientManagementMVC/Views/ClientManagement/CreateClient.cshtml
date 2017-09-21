@@ -1,0 +1,90 @@
+﻿@model RTTClientManagementMVC.ViewModels.ClientViewModel
+
+@{
+    ViewBag.Title = "Create Client";
+}
+
+<h2>Create Client</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+
+    <div style="text-align:center">
+
+        <table>
+            <tr>
+                <td>
+                    Name :
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.name)
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Gender :
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.gender)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Cell Number :
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.cellNumber)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Work Tel :
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.workTel)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Residetial Address :
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.resAddress)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Work Address :
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.workAddress)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Postal Address :
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.posAddress)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Submit" />
+                </td> 
+            </tr>
+        </table>
+
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

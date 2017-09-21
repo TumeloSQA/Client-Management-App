@@ -1,0 +1,61 @@
+﻿@model IEnumerable<RTTClientManagementMVC.Models.ClientModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Add New Client", "Create")
+</p>
+<p class="navbar-text navbar-right">
+    @Html.ActionLink("Save To File", "SaveToFile")
+</p>
+<table class="table">
+    <tr>
+        <th>Client ID</th>
+        <th>Client Name</th>
+        <th>Gender</th><th>Cell Number</th>
+        <th>Work Tell</th>
+        <th>Residential Address</th>
+        <th>Work Address</th>
+        <th>Postal Address</th>
+        <th>Actions</th>
+    </tr>
+
+@foreach (System.Data.DataRow item in ViewBag.ClientList.Rows) {
+    <tr>
+        <td>
+            @item["clientId"].ToString()
+        </td>
+        <td>
+            @item["name"].ToString()
+        </td>
+        <td>
+            @item["gender"].ToString()
+        </td>
+        <td>
+            @item["cellNumber"].ToString()
+        </td>
+        <td>
+            @item["workTel"].ToString()
+        </td>
+        <td>
+            @item["resAddress"].ToString()
+        </td>
+        <td>
+            @item["workAddress"].ToString()
+        </td>
+        <td>
+            @item["posAddress"].ToString()
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>
