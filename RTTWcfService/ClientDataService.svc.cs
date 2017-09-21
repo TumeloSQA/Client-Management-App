@@ -16,7 +16,28 @@ namespace RTTWcfService
 
     public class ClientDataService : IClientDataService
     {
+        public int UpdateClient(int clientId,ClientDetails clientDetails, AddressDetails addressDetails)
+        {
+            string message;
 
+            SqlConnection sqlConnection = new SqlConnection(@"Data Source=LUTHULCOMP2\SQLEXPRESS;Initial Catalog=ClientManagerDb;Integrated Security=True");
+            sqlConnection.Open();
+
+            SqlCommand cmdClient = new SqlCommand("UPDATE clientDetails, clientAddress SET name=@name, gender=@gender,cellNumber=@cellNumber,workTel=@workTel,resAddress=@resAddress,workAddress=@workAddress,posAddress=@posAddress WHERE clientId=" + clientId +" " + "AND addressId=" +addressDetails.AddressId, sqlConnection);
+            //cmdClient.Parameters.AddWithValue("@clientId", clientDetails.ClientId);
+            cmdClient.Parameters.AddWithValue("@name", clientDetails.Name);
+            cmdClient.Parameters.AddWithValue("@gender", clientDetails.Gender);
+            cmdClient.Parameters.AddWithValue("@cellNumber", clientDetails.CellNumber);
+            cmdClient.Parameters.AddWithValue("@workTel", clientDetails.WorkTel);
+
+            //Update address for clientId
+            cmdClient.Parameters.AddWithValue("@resAddress", addressDetails.ResAddress);
+            cmdClient.Parameters.AddWithValue("@workAddress", addressDetails.WorkAddress);
+            cmdClient.Parameters.AddWithValue("@posAddress", addressDetails.PosAddress);
+
+            return cmdClient.ExecuteNonQuery();
+
+        }
         public string InsertClientDetails(ClientDetails clientDetails, AddressDetails addressDetails)
         {
             string message;
@@ -83,10 +104,12 @@ namespace RTTWcfService
                 
                     string strCommand = "DELETE FROM ClientDetails WHERE clientId = " + clientId;
                     sqlConnection.Open();
-                    SqlCommand cmdDelete = new SqlCommand();
-                    cmdDelete.Connection = sqlConnection;
-                    cmdDelete.CommandType = CommandType.Text;
-                    cmdDelete.CommandText = strCommand;
+                    SqlCommand cmdDelete = new SqlCommand
+                    {
+                        Connection = sqlConnection,
+                        CommandType = CommandType.Text,
+                        CommandText = strCommand
+                    };
                     return cmdDelete.ExecuteNonQuery();
                 }
             }

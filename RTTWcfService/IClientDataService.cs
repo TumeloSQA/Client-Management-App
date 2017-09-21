@@ -24,9 +24,9 @@ namespace RTTWcfService
         [FaultContract(typeof(ExceptionMessage))]
         int DeleteClient(int clientId);
 
-        //[OperationContract]
-        //[FaultContract(typeof(ExceptionMessage))]
-        //void UpdateClient(ClientDetails clientDetails, AddressDetails addressDetails);
+        [OperationContract]
+        [FaultContract(typeof(ExceptionMessage))]
+        int UpdateClient(int clientId,ClientDetails clientDetails, AddressDetails addressDetails);
 
     }
     

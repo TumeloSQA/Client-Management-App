@@ -33,16 +33,17 @@ namespace RTTClientManagementMVC.Controllers
         {
 
             ClientDetails clientDetails = new ClientDetails();
-            ClientViewModel clientViewModel = new ClientViewModel();
+            ClientViewModel clientViewModel = new ClientViewModel
+            {
+                name = clientModel.Name,
+                gender = clientModel.Gender,
+                cellNumber = clientModel.CellNumber,
+                workTel = clientModel.WorkTel,
 
-            clientViewModel.name = clientModel.Name;
-            clientViewModel.gender = clientModel.Gender;
-            clientViewModel.cellNumber = clientModel.CellNumber;
-            clientViewModel.workTel = clientModel.WorkTel;
-
-            clientViewModel.resAddress = clientAddress.ResAddress;
-            clientViewModel.workAddress = clientAddress.WorkAddress;
-            clientViewModel.posAddress = clientAddress.PosAddress;
+                resAddress = clientAddress.ResAddress,
+                workAddress = clientAddress.WorkAddress,
+                posAddress = clientAddress.PosAddress
+            };
 
             serviceRef.InsertClientDetails(clientModel, clientAddress);
             return RedirectToAction("Index", "ClientManagement");
@@ -59,7 +60,7 @@ namespace RTTClientManagementMVC.Controllers
                 
                 sb.AppendLine(data["clientId"].ToString() + "," + data["name"].ToString() + ","+ data["gender"].ToString()+ ", " + data["resAddress"].ToString() + ", " + data["workAddress"].ToString() + ", " + data["posAddress"].ToString());
             }
-            return File(new UTF8Encoding().GetBytes(sb.ToString()), "application/txt", "clidentData.txt");
+            return File(new UTF8Encoding().GetBytes(sb.ToString()), "application/txt", "clientData_" + DateTime.Now +".txt");
         }
     }
 
