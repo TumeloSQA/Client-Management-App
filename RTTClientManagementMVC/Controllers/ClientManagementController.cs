@@ -42,7 +42,7 @@ namespace RTTClientManagementMVC.Controllers
             clientViewModel.workAddress = clientAddress.WorkAddress;
             clientViewModel.posAddress = clientAddress.PosAddress;
 
-            serviceRef.InsertClientDetails(clientDetails, clientAddress);
+            serviceRef.InsertClientDetails(clientModel, clientAddress);
             return RedirectToAction("Index", "ClientManagement");
 
         }
