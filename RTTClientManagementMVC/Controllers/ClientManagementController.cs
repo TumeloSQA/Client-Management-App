@@ -32,22 +32,8 @@ namespace RTTClientManagementMVC.Controllers
         public ActionResult Create(ClientDetails clientModel, AddressDetails clientAddress)
         {
 
-            ClientDetails clientDetails = new ClientDetails();
-            ClientViewModel clientViewModel = new ClientViewModel
-            {
-                name = clientModel.Name,
-                gender = clientModel.Gender,
-                cellNumber = clientModel.CellNumber,
-                workTel = clientModel.WorkTel,
-
-                resAddress = clientAddress.ResAddress,
-                workAddress = clientAddress.WorkAddress,
-                posAddress = clientAddress.PosAddress
-            };
-
             serviceRef.InsertClientDetails(clientModel, clientAddress);
             return RedirectToAction("Index", "ClientManagement");
-
         }
 
         public FileResult SaveToFile()
